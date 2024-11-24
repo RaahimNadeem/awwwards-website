@@ -1,151 +1,111 @@
-import { useRef, useState } from "react";
+import { TiLocationArrow } from "react-icons/ti";
+import { useEffect, useRef, useState } from "react";
+
+import Button from "./Button";
+
 
 const Hero = () => {
-  // State hooks to track video-related states
-  const [currentIndex, setCurrentIndex] = useState(1); // Tracks the current video index
-  const [hasClicked, setHasClicked] = useState(false); // Tracks if the mini player was clicked
-  const [isLoading, setIsLoading] = useState(true); // Tracks if the video is still loading
-  const [loadedVideos, setLoadedVideos] = useState(0); // Tracks the number of videos loaded
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [hasClicked, setHasClicked] = useState(false);
 
-  const totalVideos = 4; // Total number of videos available for the player (adjusted to 4)
+  const [loading, setLoading] = useState(true);
+  const [loadedVideos, setLoadedVideos] = useState(0);
 
-  // useRef hook to target specific DOM elements (in this case, the next video player)
-  const nextVideoRef = useRef(null); // Reference for the next video
+  const totalVideos = 4;
+  const nextVdRef = useRef(null);
 
-  // Calculate the next video index (loops back to the first video after the last one)
-  const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
-
-  // Handle mini video player click: switches to the next video
-  const handleMiniVideoClick = () => {
-    setHasClicked(true); // Marks the mini player as clicked
-    setCurrentIndex(upcomingVideoIndex); // Increment the index to show the next video
-  };
-
-  // Increment the number of videos that have finished loading
   const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1); // Updates the loaded videos count
+    setLoadedVideos((prev) => prev + 1);
   };
 
-  // Function to get the video source URL based on the index
+  useEffect(() => {
+    if (loadedVideos === totalVideos - 1) {
+      setLoading(false);
+    }
+  }, [loadedVideos]);
+
+  const handleMiniVdClick = () => {
+    setHasClicked(true);
+
+    setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
+  };
+
+  
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
-      {/* Hero section container 
-        - 'relative': Positions the child elements relative to this container.
-        - 'h-dvh': Ensures the height is dynamic based on the viewport height.
-        - 'w-screen': Ensures the container spans the full width of the screen.
-        - 'overflow-x-hidden': Prevents horizontal scrolling by clipping content that overflows.
-      */}
+    
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
-        {/* Video frame container 
-          - 'relative': Positions this container for its child elements (like videos and buttons).
-          - 'z-10': Ensures this element appears above other elements in the stacking context.
-          - 'h-dvh': Makes the height responsive to the viewport's height.
-          - 'w-screen': Ensures the container spans the entire width of the screen.
-          - 'overflow-hidden': Prevents any overflow content from being visible.
-          - 'rounded-lg': Applies rounded corners to the video container.
-          - 'bg-blue-75': Gives the container a light blue background color.
-        */}
         <div>
-          {/* Main video 
-            - 'absolute': Positions the video absolutely within its parent container.
-            - 'left-0 top-0': Ensures the video starts at the top-left corner of the container.
-            - 'size-full': Stretches the video to take up the full size of the container.
-            - 'object-cover': Ensures the video covers the entire container without distortion, clipping where necessary.
-            - 'object-center': Keeps the video centered within the container, especially for `object-cover` behavior.
-            - 'autoPlay': Automatically starts playing the video.
-            - 'loop': Makes the video loop continuously.
-            - 'muted': Mutes the video by default to prevent sound from starting automatically.
-          */}
-          <video
-            src={getVideoSrc(currentIndex)} // Get the video source based on the current index
-            autoPlay
-            loop
-            muted
-            className="absolute left-0 top-0 size-full object-cover object-center"
-            onLoadedData={handleVideoLoad} // Calls when the video has finished loading
-          />
-          {/* Mini video player button */}
-          <div className="mask-clip-path absolute-center z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            {/* 
-              - 'absolute-center': Custom utility (likely a CSS class) to center the button both horizontally and vertically.
-              - 'z-50': Ensures the mini video player appears above other content, with the highest stacking order.
-              - 'size-64': Sets a fixed size for the mini player (64px by 64px).
-              - 'cursor-pointer': Indicates the button is clickable (shows a pointer cursor on hover).
-              - 'overflow-hidden': Ensures any overflowed content from the button is hidden.
-              - 'rounded-lg': Gives the button rounded corners for a modern, clean look.
-            */}
-            <div
-              onClick={handleMiniVideoClick} // Handles the click event to change to the next video
-              className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-            >
-              {/* Mini video 
-                - 'size-64': Sets a fixed size for the mini player (64px by 64px).
-                - 'origin-center': Defines the scaling origin at the center of the element.
-                - 'scale-150': Initially scales the mini player to 150% of its size.
-                - 'object-cover': Ensures the mini video fills the container and maintains the aspect ratio.
-                - 'object-center': Centers the content within the mini video container.
-                - 'onLoadedData': Calls `handleVideoLoad` when the mini video finishes loading.
-              */}
-              <video
-                src={getVideoSrc(upcomingVideoIndex)} // Get the video source based on the upcoming index
-                ref={nextVideoRef}
-                loop
-                muted
-                id="current-video"
-                className="size-64 origin-center scale-150 object-cover object-center"
-                onLoadedData={handleVideoLoad} // Calls when the mini video finishes loading
-              />
-            </div>
+          <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
+              <div
+                onClick={handleMiniVdClick}
+                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+              >
+                <video
+                  ref={nextVdRef}
+                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
+                  loop
+                  muted
+                  id="current-video"
+                  className="size-64 origin-center scale-150 object-cover object-center"
+                  onLoadedData={handleVideoLoad}
+                />
+              </div>
           </div>
 
-          {/* Invisible next video (to load it in advance) */}
           <video
-            ref={nextVideoRef}
-            src={getVideoSrc(currentIndex === totalVideos ? 1 : currentIndex)} // Load the next video (wrap around to 1 if last)
+            ref={nextVdRef}
+            src={getVideoSrc(currentIndex)}
             loop
             muted
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-            onLoadedData={handleVideoLoad} // Calls when the next video finishes loading
+            onLoadedData={handleVideoLoad}
+          />
+          <video
+            src={getVideoSrc(
+              currentIndex === totalVideos - 1 ? 1 : currentIndex
+            )}
+            autoPlay
+            loop
+            muted
+            className="absolute left-0 top-0 size-full object-cover object-center"
+            onLoadedData={handleVideoLoad}
           />
         </div>
-      </div>
 
-      {/* Text */}
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
-        G<b>a</b>ming
-      </h1>
+        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
+          G<b>A</b>MING
+        </h1>
 
-      {/* Top part's text: Title, subheading, and a CTA button */}
-      <div className="absolute left-0 top-0 z-40 size-full">
-        <div className="mt-24 px-5 sm:px-10">
-          {/* 
-            Inner content container:
-      
-            These classes ensure that the content is not too close to the edges, and the responsive `sm:px-10` ensures more space on wider screens.
-          */}
+        <div className="absolute left-0 top-0 z-40 size-full">
+          <div className="mt-24 px-5 sm:px-10">
+            <h1 className="special-font hero-heading text-blue-100">
+              redefi<b>n</b>e
+            </h1>
 
-          {/* Title for the section:*/}
-          <h1 className="special-font hero-heading text-blue-75">
-            Redefi<b>n</b>e
-          </h1>
+            <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
+              Enter the Metagame Layer <br /> Unleash the Play Economy
+            </p>
 
-          {/* 
-            Subheading text:
-                - 'mb-5': Adds **margin-bottom** of 5 units to separate this paragraph from any following elements.
-                - 'max-w-64': Limits the maximum width of the text to 64 units, ensuring it doesn't stretch too wide on larger screens.
-          */}
-          <p className="mb-5 max-w-64 font-robert-regular text-blue-75">
-            Enter the Metagame layer <br />
-            Unleash the Play Economy
-          </p>
+            <Button
+              id="watch-trailer"
+              title="Watch trailer"
+              leftIcon={<TiLocationArrow />}
+              containerClass="bg-yellow-300 flex-center gap-1"
+            />
+          </div>
         </div>
       </div>
+
+      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
+        G<b>A</b>MING
+      </h1>
     </div>
   );
 };
