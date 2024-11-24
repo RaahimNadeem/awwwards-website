@@ -37,7 +37,10 @@ const Hero = () => {
         - 'w-screen': Ensures the container spans the full width of the screen.
         - 'overflow-x-hidden': Prevents horizontal scrolling by clipping content that overflows.
       */}
-      <div id="video-frame" className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75">
+      <div
+        id="video-frame"
+        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
+      >
         {/* Video frame container 
           - 'relative': Positions this container for its child elements (like videos and buttons).
           - 'z-10': Ensures this element appears above other elements in the stacking context.
@@ -113,8 +116,36 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Placeholder text for the Hero section */}
-      Hero
+      {/* Text */}
+      <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
+        G<b>a</b>ming
+      </h1>
+
+      {/* Top part's text: Title, subheading, and a CTA button */}
+      <div className="absolute left-0 top-0 z-40 size-full">
+        <div className="mt-24 px-5 sm:px-10">
+          {/* 
+            Inner content container:
+      
+            These classes ensure that the content is not too close to the edges, and the responsive `sm:px-10` ensures more space on wider screens.
+          */}
+
+          {/* Title for the section:*/}
+          <h1 className="special-font hero-heading text-blue-75">
+            Redefi<b>n</b>e
+          </h1>
+
+          {/* 
+            Subheading text:
+                - 'mb-5': Adds **margin-bottom** of 5 units to separate this paragraph from any following elements.
+                - 'max-w-64': Limits the maximum width of the text to 64 units, ensuring it doesn't stretch too wide on larger screens.
+          */}
+          <p className="mb-5 max-w-64 font-robert-regular text-blue-75">
+            Enter the Metagame layer <br />
+            Unleash the Play Economy
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
