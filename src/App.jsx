@@ -1,11 +1,22 @@
-// import React from "react"
+import Hero from "./components/Hero";
 
 const App = () => {
   return (
-    <main>
-      <h1 className = "text-5xl text-orange-500 font-bold font-circular-medium text-violet-300">Welcome to Awwards</h1>
-    </main>
-  )
-}
+    <main className="relative min-h-screen w-screen overflow-x-hidden">
+      {/* 
+        min-h-screen: 
+          - Sets the minimum height of the <main> element to 100% of the viewport height.
+          - Ensures the element covers the full screen even if the content is less.
 
-export default App
+        w-screen: 
+          - Sets the width of the <main> element to exactly match the width of the viewport.
+
+        overflow-x-hidden: 
+          - Prevents horizontal scrolling if child elements extend beyond the viewport width.
+      */}
+      <Hero />
+    </main>
+  );
+};
+
+export default App;
