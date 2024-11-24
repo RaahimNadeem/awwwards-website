@@ -7,15 +7,18 @@ const Hero = () => {
   const [isLoading, setIsLoading] = useState(true); // Tracks whether the video is still loading
   const [loadedVideos, setLoadedVideos] = useState(0); // Tracks how many videos have loaded
 
-  const totalVideos = 4; // Total number of videos available for the player
+  const totalVideos = 3; // Total number of videos available for the player
 
   // useRef hook to target specific DOM elements (in this case, the next video player)
   const nextVideoRef = useRef(null); // Reference for the next video
 
+  // We use the modulo operator i.e., % so that after the last video it loops back to the first
+  const upcomingVideoIndex = (currentIndex % totalVideos) + 1
+
   // Handle mini video player click: switches to the next video
   const handleMiniVideoClick = () => {
     setHasClicked(true); // Marks the mini player as clicked
-    setCurrentIndex((prevIndex) => prevIndex + 1); // Increment the index to show the next video
+    setCurrentIndex(upcomingVideoIndex); // Increment the index to show the next video
   };
 
   // Increment the number of videos that have finished loading
