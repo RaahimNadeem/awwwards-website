@@ -9,6 +9,8 @@ const Button = ({title, id, rightIcon, leftIcon, containerClass}) => {
             <div>{title}</div>
         </spanc>
 
+        {rightIcon}
+
     </button>
   )
 }

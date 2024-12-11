@@ -1,5 +1,6 @@
 import About from "./components/About";
 import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         overflow-x-hidden: 
           - Prevents horizontal scrolling if child elements extend beyond the viewport width.
       */}
+      <Navbar />
       <Hero />
       <About />
     </main>
