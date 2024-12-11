@@ -82,7 +82,9 @@ const Hero = () => {
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
   return (
+    // Main div
     <div className="relative h-dvh w-screen overflow-x-hidden">
+        {/* Loading Screen*/}
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
@@ -93,10 +95,12 @@ const Hero = () => {
           </div>
         </div>
       )}
+
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
+        {/* Video Player div*/}
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
             <div
@@ -136,14 +140,14 @@ const Hero = () => {
           />
         </div>
 
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
+        <h1 className="special-font hero-heading absolute bottom-5 right-0 px-8 sm:px-10 z-40 text-blue-75">
           G<b>A</b>MING
         </h1>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
             <h1 className="special-font hero-heading text-blue-100">
-              redefi<b>n</b>e
+             redefi<b>n</b>e
             </h1>
 
             <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
@@ -160,7 +164,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
+      <h1 className="special-font hero-heading absolute bottom-5 right-0 px-8 sm:px-10 text-black">
         G<b>A</b>MING
       </h1>
     </div>
