@@ -1,3 +1,4 @@
+import About from "./components/About";
 import Hero from "./components/Hero";
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
           - Prevents horizontal scrolling if child elements extend beyond the viewport width.
       */}
       <Hero />
-      <section className="z-0 min-h-screen bg-blue-500" />
+      <About />
     </main>
   );
 };

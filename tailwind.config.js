@@ -9,9 +9,9 @@ export default {
       fontFamily: {
         zentry: ['zentry', 'sanf-serif'],
         general: ['general', 'sanf-serif'],
-        'circular-medium': ['circular-web', 'sanf-serif'],
+        'circular-web': ['circular-web', 'sanf-serif'],
         'robert-medium': ['robert-medium', 'sanf-serif'],
-        'robert-regular': ['robert-regular', 'sanf-serif']
+        'robert-regular': ['robert-regular', 'sanf-serif'],
       },
       colors: {
         blue: {
