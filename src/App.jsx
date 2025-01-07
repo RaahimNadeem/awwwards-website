@@ -3,6 +3,7 @@ import Features from "./components/Features";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Story from "./components/Story";
+import Contact from "./components/Contact";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <About />
       <Features />
       <Story />
+      <Contact />
     </main>
   );
 };
