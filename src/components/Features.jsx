@@ -82,6 +82,14 @@ const Features = () => {
               <TiLocationArrow className="m-5 scale-[5] self-end" />
             </div>
           </div>
+
+          <div className="bento-tilt_2">
+            <video src="videos/feature-5.mp4" 
+            loop
+            muted
+            autoPlay
+            className="size-full object-cover object-center"/>
+          </div>
         </div>
       </div>
     </section>
