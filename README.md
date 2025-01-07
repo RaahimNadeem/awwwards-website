@@ -21,8 +21,9 @@
 ---
 
 ## 🤖 Introduction
+**Visit the live project here: [zentry-raahim.vercel.app](https://zentry-raahim.vercel.app/)**  
 
-This project showcases a visually captivating website inspired by **[Zentry](https://zentry.com/)**. It features scroll-triggered animations, geometric transitions, and responsive design to deliver a luxurious and engaging user experience.
+This project showcases a visually captivating website inspired by **Zentry**. It features scroll-triggered animations, geometric transitions, and responsive design to deliver a luxurious and engaging user experience.
 
 ---
 
